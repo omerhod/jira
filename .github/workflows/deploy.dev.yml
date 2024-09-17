@@ -1,0 +1,42 @@
+name: Deploy to Development Environment
+
+on:
+  push:
+    branches:
+      - "development/*"
+
+env:
+  NODE_ENV: development
+
+jobs:
+  deploy:
+    name: Deploy to Development Environment
+    runs-on: ubuntu-latest
+
+    environment:
+      name: development
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build (if applicable)
+        run: |
+          # Optional: build step
+          echo "Building the project..."
+          npm run build
+
+      - name: Deploy to Development Environment
+        run: |
+          echo "Deploying to the development environment..."
+          # Simulate the deployment process
+          echo "Environment: $NODE_ENV"
+          echo "Deployment completed for $NODE_ENV environment."
